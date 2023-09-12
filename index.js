@@ -50,19 +50,19 @@ const adicionaUser = (nome, email) => {
 
     document.querySelector('main').appendChild(divUsuarios)
 
-    // return(
-    //     `
-    //         <div id="imgUser">
-    //             <img src="svg-user-login.svg" alt="foto de perfil" width="60px">
-    //         </div>
-    //         <div id="dadosUser">
-    //             <h3>${nome}/h3>
-    //             <span>${email}</span>
-    //         </div>
-    //         <div id="divCloseBtn">
-    //             <button>X</button>
-    //         </div>
-
-    //     `
-    // )
 }
+
+
+const getDadosAPI = () => {
+
+    let url = 'https://reqres.in/api/users?page=2'
+    fetch(url)
+        .then(resposta => resposta.json())
+        .then(dados => {
+            dados.data.map( dado => {
+                adicionaUser(dado.first_name, dado.email)
+            })
+        })
+}
+
+getDadosAPI()
